@@ -1,0 +1,25 @@
+{{#unless error}}
+<div class="bg-light p-5 rounded mt-3">
+    <h1>Editar</h1>
+    <form action="/update" method="post">    
+        <div class="row g-2">
+            <div class="col-md-5 mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="hidden" value="{{id}}" name="id">
+                <input value="{{nome}}" type="text" class="form-control" id="nome" placeholder="Seu nome">
+            </div>
+            <div class="col-md-5 mb-3">
+                <label for="email" class="form-label">Seu email</label>
+                <input value="{{email}}" type="email" class="form-control" id="email" placeholder="nome@exemplo.com">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-warning mt-3 p-3 w-100">Salvar alterações</button>
+            </div>
+        </div>
+    </form>
+</div>
+{{else}}
+    <div class="card bg-danger text-white">
+        Houve um problema: {{problema}}
+    </div>
+{{/unless}}
