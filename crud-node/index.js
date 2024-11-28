@@ -60,10 +60,21 @@ app.get('/users', (req, res)=>{
     //res.render('users',{NavActiveUsers:true})
 })
 
+app.post('/editar', (req, res)=>{
+    var id = req.body.id
+    Usuario.findByPk(id).then((dados)=>{
+        return res.render('editar', {error:false, id: dados.id, nome: dados.nome, email: dados.email})
+    }).catch((err)=>{
+        console.log(err)
+        return res.render('editar', {error: true, problema: 'Não é possível editar este registro'})
+    })
+    //res.render('editar')
+})
+
 app.post('/cad', (req, res)=>{ //valores vindos do formulário
     
-    let nome = req.body.nome;
-    let email = req.body.email;
+    var nome = req.body.nome;
+    var email = req.body.email;
 
     //console.log(req.body)
     //array com os erros
@@ -128,21 +139,10 @@ app.post('/cad', (req, res)=>{ //valores vindos do formulário
 
 })
 
-app.post('/editar', (req, res)=>{
-    let id = req.body.id
-    Usuario.findByPk(id).then((dados)=>{
-        return res.render('editar', {error:false, id: dados.id, nome: dados.nome, email: dados.email})
-    }).catch((err)=>{
-        console.log(err)
-        return res.render('editar', {error: true, problema: 'Não é possível editar este registro'})
-    })
-    //res.render('editar')
-})
-
 app.post('/update', (req, res)=>{
 
-    let nome = req.body.nome
-    let email = req.body.email
+    var nome = req.body.nome
+    var email = req.body.email
 
     //console.log(nome)
 
@@ -153,14 +153,14 @@ app.post('/update', (req, res)=>{
 
     // remover os espaços em branco
 
-    //nome = nome.trim()
-    //email = email.trim()
+    nome = nome.trim()
+    email = email.trim()
+    email = email.toLowerCase()
 
     // Limpar o nome de caracteres especiais (apenas letras)
 
-    //nome = nome.replace(/[^A-zÀ-ú\s]/gi,'')
-    //nome = nome.trim()
-    //console.log(nome)
+    nome = nome.replace(/[^A-zÀ-ú\s]/gi,'')
+    nome = nome.trim()
 
     //Verificar se está vazio ou não definido o campo
 
@@ -196,16 +196,16 @@ app.post('/update', (req, res)=>{
 
     Usuario.update(
         {
-        name: nome,
-        email: email.toLowerCase()
+            nome: nome,
+            email: email.toLowerCase()
         },
         {
-        where: {
-            id: req.body.id
-        }
+            where: {
+                id: req.body.id
+            }
         }).then((resultado)=>{
             console.log(resultado)
-            return res. redirect('/users')
+            return res.redirect('/users')
         }).catch((err)=>{
             console.log(err)
         

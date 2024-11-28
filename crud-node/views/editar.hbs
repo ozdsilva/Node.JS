@@ -6,11 +6,11 @@
             <div class="col-md-5 mb-3">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="hidden" value="{{id}}" name="id">
-                <input value="{{nome}}" type="text" class="form-control" id="nome" placeholder="Seu nome">
+                <input value="{{nome}}" type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome" required>
             </div>
             <div class="col-md-5 mb-3">
                 <label for="email" class="form-label">Seu email</label>
-                <input value="{{email}}" type="email" class="form-control" id="email" placeholder="nome@exemplo.com">
+                <input value="{{email}}" type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" required>
             </div>
             <div class="col-md-2">
                 <button type="submit" class="btn btn-warning mt-3 p-3 w-100">Salvar alterações</button>
@@ -19,7 +19,9 @@
     </form>
 </div>
 {{else}}
-    <div class="card bg-danger text-white">
+<div class="card bg-danger text-white">
+    <div class="card-body">
         Houve um problema: {{problema}}
     </div>
+</div>
 {{/unless}}

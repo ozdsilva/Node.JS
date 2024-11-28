@@ -12,12 +12,12 @@ const sequelize = new Sequelize('node_exemplo','root','MySQL135131+',{ //MySQL13
 
 //const db = require('./models/');  // Ajuste se o caminho é relativo
 
-/*teste de conexão
+//teste de conexão
 
 sequelize.authenticate().then(function(){
     console.log('Conectado no banco de dados com sucesso!')
 }).catch(function(err){
     console.log('Falha ao se conectar: '+err)
-})*/
+})
 
 module.exports = {Sequelize, sequelize}
