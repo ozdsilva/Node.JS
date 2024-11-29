@@ -17,7 +17,7 @@
                 <td>{{nome}}</td>
                 <td>{{email}}</td>
                 <td>
-                    <div class="col">
+                    <div class="row">
                         <div class="col-12 col-md-6">
                             <form action="/editar" method="post">
                             <input type="hidden" name="id" value="{{id}}">
@@ -27,7 +27,6 @@
                         <div class="col-12 col-md-6">
                             <button data-bs-toggle="modal" data-bs-target="#deleteModal_{{id}}" 
                             class="w-100 btn btn-danger">Deletar</button>
-
                         </div>
                     </div>
                 </td>
