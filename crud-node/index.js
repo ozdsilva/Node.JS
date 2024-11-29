@@ -139,7 +139,12 @@ app.post('/cad', (req, res)=>{ //valores vindos do formulário
 
 })
 
+
 app.post('/update', (req, res)=>{
+
+    if (!req.body.id) {
+        return res.status(400).send({ status: 400, erro: "ID do usuário é obrigatório" });
+    }
 
     var nome = req.body.nome
     var email = req.body.email
@@ -189,6 +194,8 @@ app.post('/update', (req, res)=>{
     if(erros.length > 0) {
         console.log(erros)
         return res.status(400).send({status: 400, erro: erros})
+    } else {
+        console.log(req.body.id)
     }
 
     //Sucesso nenhum erro
@@ -209,6 +216,18 @@ app.post('/update', (req, res)=>{
         }).catch((err)=>{
             console.log(err)
         
+    })
+})
+
+app.post('/del', (req, res)=>{
+    Usuario.destroy({
+        where: {
+            id: req.body.id
+        }
+    }).then((retorno)=>{
+        return res.redirect('/users')
+    }).catch((err)=>{
+        console.log(err)
     })
 })
 
